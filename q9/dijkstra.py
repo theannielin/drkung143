@@ -29,6 +29,7 @@ class Dijkstra (EventMixin):
             link = row["link"]
             delay = row["delay"]
             self.thelist.append(Link(link), Delay(delay))
+        ''' end of random stuff '''
 
     def _handle_ConnectionUp (self, event):    
         ''' Add your logic here ... '''
