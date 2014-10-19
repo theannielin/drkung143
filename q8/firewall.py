@@ -34,6 +34,7 @@ class Firewall (EventMixin):
     def _handle_ConnectionUp (self, event):    
         ''' Add your logic here ... '''
         ''' TODO: Add more stuff '''
+
         
         
 

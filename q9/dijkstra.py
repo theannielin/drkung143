@@ -6,7 +6,7 @@ from pox.lib.addresses import EthAddr
 from collections import namedtuple
 import os
 ''' Add your imports here ... '''
-
+import csv
 
 
 log = core.getLogger()
@@ -21,6 +21,14 @@ class Dijkstra (EventMixin):
     def __init__ (self):
         self.listenTo(core.openflow)
         log.debug("Enabling Dijkstra Module")
+
+
+
+        self.thelist =  []
+        for row in delayFile:
+            link = row["link"]
+            delay = row["delay"]
+            self.thelist.append(Link(link), Delay(delay))
 
     def _handle_ConnectionUp (self, event):    
         ''' Add your logic here ... '''
