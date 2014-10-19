@@ -23,7 +23,7 @@ class Dijkstra (EventMixin):
         log.debug("Enabling Dijkstra Module")
 
 
-
+        ''' lols wtf? maybe??? ... '''
         self.thelist =  []
         for row in delayFile:
             link = row["link"]
