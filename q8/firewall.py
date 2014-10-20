@@ -9,15 +9,11 @@ import os
 ''' Add your imports here ... '''
 import csv
 
-
-
 #log = core.getLogger()
 policyFile = "%s/pox/pox/misc/firewall-policies.csv" % os.environ[ 'HOME' ]  
 
 ''' Add your global variables here ... '''
 input_file = csv.DictReader(open(policyFile))
-
-
 
 
 class Firewall (EventMixin):
@@ -40,8 +36,6 @@ class Firewall (EventMixin):
             fm.match = match
             event.connection.send(fm)
         
-        
-
     
 #log.debug("Firewall rules installed on %s", dpidToStr(event.dpid))
 
