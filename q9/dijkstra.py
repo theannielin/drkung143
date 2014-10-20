@@ -14,7 +14,16 @@ delayFile = "delay.csv"
 
 ''' Add your global variables here ... '''
 delayFile = csv.DictReader(open(delayFile))
-
+switches = {
+    'g': ('s11', 's12'),
+    'h': ('s12', 's14'),
+    'i': ('s14', 's16'),
+    'j': ('s16', 's18'),
+    'k': ('s11', 's18'),
+    'l': ('s12', 's18'),
+    'm': ('s12', 's16'),
+    'n': ('s14', 's18'),
+}
 
 
 class Dijkstra (EventMixin):
@@ -22,46 +31,38 @@ class Dijkstra (EventMixin):
     def __init__ (self):
         self.listenTo(core.openflow)
         log.debug("Enabling Dijkstra Module")
-        self.thelist =  []
+        ''' self.thelist =  []
         for row in delayFile:
             link = row["link"]
             delay = row["delay"]
             self.thelist.append((link, delay))
             self.switches = (s11, s12, s14, s16, s18)
             self.hosts = (h13, h15, h17, h19)
-            self.distances = {}
+            self.distances = {} '''
+
+    # http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm
+    def _dijkstra(self, source):
+        dist = {source: 0}
+        prev = defaultdict(None)
+        Q = set()
+        for switch in switches:
+            if switch != source:
+                dist[switch]  = float("inf")
+                prev[switch]  = None
+            Q.add(switch)
+        while Q != set():
+            u = switch in Q with min dist[u]
+            remove u from Q
+            for each neighbor v of u:
+                alt := dist[u] + length(u, v)
+                if alt < dist[v]:
+                    dist[v]  := alt
+                    previous[v]  := u
+        return dist, previous
 
 
     def _handle_ConnectionUp (self, event):    
         ''' Add your logic here ... '''
-        visited = {initial: 0}
-        path = {}
-        nodes = set(self.switches)
-
-        while nodes: 
-        min_node = None
-        for node in nodes:
-          if node in visited:
-            if min_node is None:
-              min_node = node
-            elif visited[node] < visited[min_node]:
-              min_node = node
-
-        nodes.remove(min_node)
-        current_weight = visited[min_node]
-
-        #from h13 to h15
-        for link in self.thelist[min_node]:
-          weight = current_weight + self.distance[(min_node, link)]
-          if link not in visited or weight < visited[link]:
-            visited[link] = weight
-            path[link] = min_node
-
-(node1, node2) = self.dict[link] 
-fm = of.ofp_flow_mod()
-fm.match.in_port = node1
-fm.actions.append(of.ofp_action_output(node2))
-
 
 
         
