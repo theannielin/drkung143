@@ -20,11 +20,11 @@ class Dijkstra (EventMixin):
     def __init__ (self):
         self.listenTo(core.openflow)
         log.debug("Enabling Dijkstra Module")
-        self.thelist =  []
+        self.thelist =  {}
         for row in delayFile:
             link = row["link"]
             delay = row["delay"]
-            self.thelist.append(link: delay)
+            self.thelist['link'] = delay
 
     # from http://geekly-yours.blogspot.com/2014/03/dijkstra-algorithm-python-example-source-code-shortest-path.html
     def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
