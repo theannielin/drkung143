@@ -71,11 +71,11 @@ class Dijkstra (EventMixin):
     def _handle_ConnectionUp (self, event):    
         ''' Add your logic here ... '''
         # make a graph with all of the switches and their delay values
-        graph = {'s11': {'s12': self.thelist[‘g’] , 's18': self.thelist[‘k’]},
-            's12': {'h13': 1, 's14': self.thelist[‘h’] , 's16': self.thelist[‘m’] , 's18': self.thelist[‘l’]},
-            's14': {'h15': 1, 's12': self.thelist[‘h’] , 's18': self.thelist[‘n’] , 's16': self.thelist[‘i’]},
-            's16': {'h17': 1, 's12': self.thelist[‘m’] , 's14': self.thelist[‘i’] , 's18': self.thelist[‘j’]},
-            's18': {'h19': 1, 's12': self.thelist[‘l’] , 's16': self.thelist[‘j’] , 's14': self.thelist[‘n’]},
+        graph = {'s11': {'s12': self.thelist["g"] , 's18': self.thelist["k"]},
+            's12': {'h13': 1, 's14': self.thelist["h"] , 's16': self.thelist["m"] , 's18': self.thelist["l"]},
+            's14': {'h15': 1, 's12': self.thelist["h"] , 's18': self.thelist["n"] , 's16': self.thelist["i"]},
+            's16': {'h17': 1, 's12': self.thelist["m"] , 's14': self.thelist["i"] , 's18': self.thelist["j"]},
+            's18': {'h19': 1, 's12': self.thelist["l"] , 's16': self.thelist["j"] , 's14': self.thelist["n"]},
             'h13': {'s12': 0},
             'h15': {'s14': 0},
             'h17': {'s16': 0},
