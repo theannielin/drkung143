@@ -9,7 +9,7 @@ import os
 import csv
 
 
-log = core.getLogger()
+#log = core.getLogger()
 delayFile = "delay.csv"
 
 ''' Add your global variables here ... '''
@@ -19,14 +19,15 @@ class Dijkstra (EventMixin):
 
     def __init__ (self):
         self.listenTo(core.openflow)
-        log.debug("Enabling Dijkstra Module")
+        #log.debug("Enabling Dijkstra Module")
         self.thelist =  {}
         for row in delayFile:
             link = row["link"]
             delay = row["delay"]
-            self.thelist['link'] = delay
+            self.thelist[link] = delay
 
     # from http://geekly-yours.blogspot.com/2014/03/dijkstra-algorithm-python-example-source-code-shortest-path.html
+    
     def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
         """ calculates a shortest path tree routed in src
         """    
@@ -82,7 +83,7 @@ class Dijkstra (EventMixin):
             'h19': {'s18': 0},
             }
 
-        # for every node, make a flow table
+        # for every node in the graph, make the flows
         for node1 in graph.keys():
             for node in graph.keys():
                 path = dijkstra(graph, node1, node2)
@@ -94,7 +95,7 @@ class Dijkstra (EventMixin):
                         fm.match.in_port = link1
                         fm.actions.append(of.ofp_action_output(port = link2))
         
-        log.debug("Dijkstra installed on %s", dpidToStr(event.dpid))        
+        #log.debug("Dijkstra installed on %s", dpidToStr(event.dpid))        
 
 def launch ():
     '''
