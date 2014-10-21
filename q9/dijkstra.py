@@ -25,9 +25,20 @@ class Dijkstra (EventMixin):
             link = row["link"]
             delay = row["delay"]
             self.thelist[link] = delay
+        print self.thelist
+        # make a graph with all of the switches and their delay values
+        graph = {'s11': {'s12': self.thelist["g"] , 's18': self.thelist["k"]},
+            's12': {'h13': 1, 's14': self.thelist["h"] , 's16': self.thelist["m"] , 's18': self.thelist["l"]},
+            's14': {'h15': 1, 's12': self.thelist["h"] , 's18': self.thelist["n"] , 's16': self.thelist["i"]},
+            's16': {'h17': 1, 's12': self.thelist["m"] , 's14': self.thelist["i"] , 's18': self.thelist["j"]},
+            's18': {'h19': 1, 's12': self.thelist["l"] , 's16': self.thelist["j"] , 's14': self.thelist["n"]},
+            'h13': {'s12': 0},
+            'h15': {'s14': 0},
+            'h17': {'s16': 0},
+            'h19': {'s18': 0},
+            }
 
     # from http://geekly-yours.blogspot.com/2014/03/dijkstra-algorithm-python-example-source-code-shortest-path.html
-    
     def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
         """ calculates a shortest path tree routed in src
         """    
@@ -71,18 +82,6 @@ class Dijkstra (EventMixin):
 
     def _handle_ConnectionUp (self, event):    
         ''' Add your logic here ... '''
-        # make a graph with all of the switches and their delay values
-        graph = {'s11': {'s12': self.thelist["g"] , 's18': self.thelist["k"]},
-            's12': {'h13': 1, 's14': self.thelist["h"] , 's16': self.thelist["m"] , 's18': self.thelist["l"]},
-            's14': {'h15': 1, 's12': self.thelist["h"] , 's18': self.thelist["n"] , 's16': self.thelist["i"]},
-            's16': {'h17': 1, 's12': self.thelist["m"] , 's14': self.thelist["i"] , 's18': self.thelist["j"]},
-            's18': {'h19': 1, 's12': self.thelist["l"] , 's16': self.thelist["j"] , 's14': self.thelist["n"]},
-            'h13': {'s12': 0},
-            'h15': {'s14': 0},
-            'h17': {'s16': 0},
-            'h19': {'s18': 0},
-            }
-
         # for every node in the graph, make the flows
         for node1 in graph.keys():
             for node in graph.keys():
